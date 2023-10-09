@@ -8,7 +8,7 @@ import enum
 from ia_2022 import entorn
 
 
-class ClauPercepcio(enum.Enum):
+class SENSOR(enum.Enum):
     MONEDES = 0
 
 

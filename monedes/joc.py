@@ -1,7 +1,7 @@
 import random
 
 from ia_2022 import agent, entorn, joc
-from monedes.entorn import AccionsMoneda, ClauPercepcio
+from monedes.entorn import AccionsMoneda, SENSOR
 
 
 class Moneda(joc.JocNoGrafic):
@@ -55,4 +55,4 @@ class Moneda(joc.JocNoGrafic):
         print(self.__monedes)
 
     def percepcio(self) -> entorn.Percepcio:
-        return entorn.Percepcio({ClauPercepcio.MONEDES: self.__monedes})
+        return entorn.Percepcio({SENSOR.MONEDES: self.__monedes})
