@@ -13,4 +13,17 @@ class BarcaAmplada(Barca):
     def actua(
             self, percepcio: entorn.Percepcio
     ) -> entorn.Accio | tuple[entorn.Accio, object]:
-        pass
+        x = Estat(2,3,3)
+        oberts = []
+        tancats = []
+        oberts.append(x)
+        while oberts:
+            estat_actual = oberts.pop(0)
+            if estat_actual.es_meta:
+                return AccionsBarca.MOURE()
+            else:
+                fills = estat_actual.genera_fill()
+                tancats.append(estat_actual)
+                oberts.append(fills)
+        return AccionsBarca.ATURAR
+

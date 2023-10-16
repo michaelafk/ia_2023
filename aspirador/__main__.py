@@ -1,8 +1,11 @@
+import sys
+sys.path.append('C:/Users/kirky/IA_2023')
+
 from aspirador import agent, joc
 
 
 def main():
-    aspirador = agent.AspiradorMemoria()
+    aspirador = agent.AspiradorTaula()
     hab = joc.Casa([aspirador])
     hab.comencar()
 
