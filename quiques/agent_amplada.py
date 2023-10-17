@@ -1,6 +1,6 @@
 from ia_2022 import entorn
 from quiques.agent import Barca, Estat
-from quiques.entorn import AccionsBarca, SENSOR
+from quiques.entorn import SENSOR
 
 
 class BarcaAmplada(Barca):
@@ -47,4 +47,7 @@ class BarcaAmplada(Barca):
     def actua(
             self, percepcio: entorn.Percepcio
     ) -> entorn.Accio | tuple[entorn.Accio, object]:
+        estat = Estat(local_barca=percepcio[SENSOR.LLOC], polls_esq=percepcio[SENSOR.QUICA_ESQ],
+                      llops_esq=percepcio[SENSOR.LLOP_ESQ])
+
         pass
