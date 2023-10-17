@@ -10,20 +10,41 @@ class BarcaAmplada(Barca):
         self.__tancats = None
         self.__accions = None
 
+    def _cerca(self, estat_inicial: Estat):
+        self.__oberts = []
+        self.__tancats = set()
+
+        self.__oberts.append(estat_inicial)
+        actual = None
+        while len(self.__oberts) > 0:
+            actual = self.__oberts.pop(0)
+
+            if actual in self.__tancats:
+                continue
+
+            if not actual.es_segur():
+                self.__tancats.add(actual)
+                continue
+
+            if actual.es_meta():
+                break
+
+            estats_fills = actual.genera_fill()
+
+            for estat_f in estats_fills:
+                self.__oberts.append(estat_f)
+
+            self.__tancats.add(actual)
+        if actual is None:
+            raise ValueError("Error impossible")
+
+        if actual.es_meta():
+            self.__accions = actual.accions_previes
+            return True
+
+        return False
+
     def actua(
             self, percepcio: entorn.Percepcio
     ) -> entorn.Accio | tuple[entorn.Accio, object]:
-        x = Estat(2,3,3)
-        oberts = []
-        tancats = []
-        oberts.append(x)
-        while oberts:
-            estat_actual = oberts.pop(0)
-            if estat_actual.es_meta:
-                return AccionsBarca.MOURE()
-            else:
-                fills = estat_actual.genera_fill()
-                tancats.append(estat_actual)
-                oberts.append(fills)
-        return AccionsBarca.ATURAR
-
+        pass
