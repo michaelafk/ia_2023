@@ -190,7 +190,7 @@ class Taulell(joc.Joc):
 
     def percepcio(self) -> entorn.Percepcio:
         percep_dict = {
-            SENSOR.TAULELL: self.__caselles,
+            SENSOR.TAULELL: [[c.tipus for c in row] for row in self.__caselles],
             SENSOR.MIDA: self.__mida_taulell
         }
 
