@@ -106,6 +106,9 @@ class Taulell(joc.Joc):
 
             if accio is Accio.POSAR:
                 pos_x, pos_y = params
+                if not(0 < pos_x < len(self.__caselles) and 0 < pos_y < len(self.__caselles[0])):
+                    raise ValueError(f"Posició {params} fora dels límits")
+
                 self.__caselles[pos_x][pos_y].posa(agent_actual.jugador)
                 self.acabat = self.__ha_guanyat((pos_x, pos_y))
 
@@ -140,11 +143,12 @@ class Taulell(joc.Joc):
         verbose = False
 
         for i, j in zip(
-                range(pos_1 - ( 4 * desp[0]), pos_1 + (4 * desp[0]), desp[0]),
-                range(pos_2 - ( 4 * desp[1]), pos_2 + (4 * desp[1]), desp[1])
+                range(max(pos_1 - (4 * desp[0]), 0),
+                      min(pos_1 + (4 * desp[0]), len(self.__caselles)), desp[0]),
+                range(max(pos_2 - (4 * desp[1]), 0),
+                      min(pos_2 + (4 * desp[1]), len(self.__caselles[0])), desp[1])
         ):
-            if verbose:
-                print(i, j)
+
             if self.__caselles[i][j].tipus is agent.jugador:
                 if not continu:
                     continu = True
