@@ -71,7 +71,7 @@ class Casella:
 
 
 class Taulell(joc.Joc):
-    def __init__(self, agents: list[Agent] | Agent, mida_taulell: tuple[int, int] = (12, 12)):
+    def __init__(self, agents: list[Agent] | Agent, mida_taulell: tuple[int, int] = (8, 8)):
         super(Taulell, self).__init__((800, 800), agents, title="Pràctica 1")
 
         self.__caselles = []
@@ -106,7 +106,8 @@ class Taulell(joc.Joc):
 
             if accio is Accio.POSAR:
                 pos_x, pos_y = params
-                if not(0 < pos_x < len(self.__caselles) and 0 < pos_y < len(self.__caselles[0])):
+                if not (0 <= pos_x < len(self.__caselles) and 0 <= pos_y < len(
+                        self.__caselles[0])):
                     raise ValueError(f"Posició {params} fora dels límits")
 
                 self.__caselles[pos_x][pos_y].posa(agent_actual.jugador)
@@ -140,14 +141,13 @@ class Taulell(joc.Joc):
         continu = False
         count = 0
         best_lineal = 0
-        verbose = False
 
         for i, j in zip(
-                range(max(pos_1 - (4 * desp[0]), 0),
-                      min(pos_1 + (4 * desp[0]), len(self.__caselles)), desp[0]),
-                range(max(pos_2 - (4 * desp[1]), 0),
-                      min(pos_2 + (4 * desp[1]), len(self.__caselles[0])), desp[1])
+                range(pos_1 - (4 * desp[0]), pos_1 + (4 * desp[0]), desp[0]),
+                range(pos_2 - (4 * desp[1]), pos_2 + (4 * desp[1]), desp[1])
         ):
+            if not (0 <= i < len(self.__caselles) and 0 <= j < len(self.__caselles[0])):
+                continue
 
             if self.__caselles[i][j].tipus is agent.jugador:
                 if not continu:
