@@ -1,6 +1,6 @@
 from ia_2022 import entorn
 from quiques.agent import Barca, Estat
-from quiques.entorn import SENSOR
+from quiques.entorn import SENSOR,AccionsBarca
 
 
 class BarcaAmplada(Barca):
@@ -50,4 +50,11 @@ class BarcaAmplada(Barca):
         estat = Estat(local_barca=percepcio[SENSOR.LLOC], polls_esq=percepcio[SENSOR.QUICA_ESQ],
                       llops_esq=percepcio[SENSOR.LLOP_ESQ])
 
-        pass
+        exito = self._cerca(estat)
+        if exito:
+            return (AccionsBarca.MOURE,self.__accions)
+        else:
+            raise ValueError("No hay una solucion")
+        
+            
+        
