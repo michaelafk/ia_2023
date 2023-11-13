@@ -51,10 +51,11 @@ class BarcaAmplada(Barca):
                       llops_esq=percepcio[SENSOR.LLOP_ESQ])
 
         exito = self._cerca(estat)
-        if exito:
-            return (AccionsBarca.MOURE,self.__accions)
+        if len(self.__accions) == 0:
+            return AccionsBarca.ATURAR
         else:
-            raise ValueError("No hay una solucion")
+            if exito:
+                return (AccionsBarca.MOURE,self.__accions[0])
         
             
         
